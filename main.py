@@ -19,6 +19,10 @@ import re
 import requests
 from pprint import pprint
 
+#to play response tunes
+import playsound
+
+
 
 engine = pyttsx3.init('sapi5')#main engine to respond in voice 
 ''' voice setting function '''
@@ -125,6 +129,8 @@ def process_command(query):
             else:
                 print("\n")
                 return
+            playsound.playsound('response2.mp3', True)
+            time.sleep(0.02)
 
 
 ######################################   M A I N   F U N C T I O M   ##################################
@@ -136,8 +142,9 @@ if __name__ == "__main__":
     while True:
         query = takecommand().lower()
         if "hey" in query or "hay" in query or "hai" in query:
-            speak('Hmmmmm')
-            time.sleep(0.05)
+            playsound.playsound('response1.mp3', True)
+            #speak('Hmmmmm')
+            time.sleep(0.02)
             query = takecommand().lower()
             process_command(query)
         
