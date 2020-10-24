@@ -5,7 +5,7 @@ import wikipedia #pip install wikipedia
 import webbrowser
 import os
 import smtplib
-from time import ctime
+import time
 from googlesearch import search
 import subprocess#to open a file location in explorer
 import random
@@ -57,7 +57,7 @@ def takecommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        r.pause_threshold = 1
+        r.pause_threshold = 0.6
         audio = r.listen(source)
 
     try:
@@ -65,7 +65,7 @@ def takecommand():
         query = r.recognize_google(audio, language='en-in')
         print(f"User said: {query}\n")
 
-    except Exception as e:
+    except Exception:
         # print(e)    
         print("Say that again please...")  
         return "None"
@@ -107,7 +107,7 @@ def process_command(query):
                 speak("Bye for now sir,hope we will meet very soon")
                 return
 
-            elif'tell me' in query or 'wikipedia' in query::
+            elif'tell me' in query or 'wikipedia' in query:
                 speak('Searching Wikipedia...')
                 query = query.replace("tell me", "")
                 query = query.replace("about", "")
@@ -122,16 +122,24 @@ def process_command(query):
 
             elif 'thanks' in query or 'thank you' in query:
                 speak('you are welcome sir')
+            else:
+                print("\n")
+                return
 
 
 ######################################   M A I N   F U N C T I O M   ##################################
 
 if __name__ == "__main__":
     voicegenerator()
-    greet()
+    #greet()
+
     while True:
         query = takecommand().lower()
-        process_command(query)
+        if "hey" in query or "hay" in query or "hai" in query:
+            speak('Hmmmmm')
+            time.sleep(0.05)
+            query = takecommand().lower()
+            process_command(query)
         
             
                 
