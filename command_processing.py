@@ -172,15 +172,24 @@ def process_command(query):
                     speak(results)
                 except:
                     webbrowser.open("https://google.com/search?q=%s" % query)
-               
+            
+            #Open location one map
+            elif "where is" in query:
+                query = query.split(" ")
+                location = query[2]
+                speak("Hold on Sir, I will show you where " + location + " is.")
+                result=webbrowser.open("https://www.google.nl/maps/place/" + location + "/&amp;")
+                print(result)
+
             #play youtube video or live stream
             elif 'latest news'in query or 'news'in query or 'youtube video' in query or 'youtube' in query :
                 query = query.replace("tell me", "")
                 query = query.replace("youtube video", "")
                 query = query.replace("youtube", "")
-                
+                query=query.replace("play", "")
+                webbrowser.open(youtubesearch(query))
                 try:
-                    webbrowser.open(youtubesearch(query))
+                    pass
                 except:
                     speak('couldnot find the website sir')
                     speak('Searching on google')

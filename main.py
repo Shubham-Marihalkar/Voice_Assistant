@@ -23,7 +23,7 @@ if __name__ == "__main__":
                 if not(end) and exec_:
                     playsound.playsound('response2.mp3', True)
                     time.sleep(0.02)
-        if "bye" in query or "shutdown" in query:
+        if "bye for now" in query or "shutdown" in query:
             break
         
             
