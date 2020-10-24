@@ -33,7 +33,7 @@ def process_command(query):
                 speak("yes sir,Please tell me how may I help you")
     
             elif 'bye' in query:
-                speak("Bye for now sir,hope we will meet very soon")
+                speak("Byeee for now sir")
                 #end short coversation
                 return True,True
 
@@ -82,6 +82,7 @@ def process_command(query):
                         webbrowser.open(url)
                         speak('Sir,the weather forcast is')
 
+            #file opening
             elif 'read' in query and 'file' in query:
                 query = query.replace("open", "")
                 query = query.replace("file", "")
@@ -99,7 +100,6 @@ def process_command(query):
                     #os.startfile(os.path.join(fpath,query))
                 except:
                     speak("Sorry sir couldnot find the file")
-
             elif 'open' in query and( 'file' in query or 'dot' in query):
                 query = query.replace("open", "")
                 query = query.replace("file", "")
@@ -107,13 +107,11 @@ def process_command(query):
                 query = query.replace("dot", ".")
                 query = query.replace("text", "txt")
                 
-                print(query)
-                name1=find_files(query,"D:")
-                print(name1)
-                fpath=(name1)
-                fpath=fpath.split(",")[0]
+                
                 try:
-
+                    print(query)
+                    fpath=(find_files(query,"D:"))
+                    fpath=fpath.split(",")[0]
                     fpath=fpath[2:-2]
                     fpath=fpath.replace("\\\\\\","\\")
                     fpath=fpath[0:-1]
@@ -143,7 +141,25 @@ def process_command(query):
                 except:
                     speak("Sorry sir couldnot find the file")
                 
+            #website opening
+            elif 'open' in query and ('website' in query or '.com' in query or '.in' in query or '.co.in'in query or '.edu' in query):
+                query = query.replace("open", "")
+                query = query.replace("website", "")
+                query = query.replace("google", "")
+                chrome_path = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe %s'
 
+                try:
+                    for url in search(query, tld="co.in", num=1, stop = 1, pause = 2):
+                        webbrowser.open(url)
+                    speak('opening')
+                    speak(query)
+                except:
+                    speak('couldnot find the website sir')
+                    speak('Searching on google')
+                    webbrowser.open("https://google.com/search?q=%s" % query)
+                    speak('Sir,the search result are')
+                    
+               
 
 
             elif 'alright' in query or 'ok' in query or 'okay' in query or  'right' in query :
