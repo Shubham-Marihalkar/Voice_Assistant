@@ -1,3 +1,7 @@
+#path of the current local dir
 CurrentFilePath.txt
+
+#cache folder
+__pycache__
 
 
