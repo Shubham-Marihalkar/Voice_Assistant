@@ -15,8 +15,6 @@ def print_weather(result,city):
 	print("Weather: {}".format(result['weather'][0]['main']))
 	speak("Weather: {}".format(result['weather'][0]['main']))
 
-
-
 ''' function to search file location of given file '''
 def find_files(filename, search_path):
    result = []
@@ -25,3 +23,11 @@ def find_files(filename, search_path):
       if filename in files:
          result.append(os.path.join(root,""))
    return (str(result))
+
+
+'''You tube search function '''
+def youtubesearch(query):    
+    query_string = urllib.parse.urlencode({"search_query" : str(query)})
+    html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
+    search_results = re.findall(r'href=\"\/watch\?v=(.{11})', html_content.read().decode())
+    return str("http://www.youtube.com/watch?v=" + search_results[0])

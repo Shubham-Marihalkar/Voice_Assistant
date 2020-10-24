@@ -37,7 +37,7 @@ def process_command(query):
                 #end short coversation
                 return True,True
 
-            elif'tell me' in query or 'wikipedia' in query:
+            elif'tell me' in query or 'wikipedia' in query or 'what is' in query or 'search' in query:
                 speak('Searching Wikipedia...')
                 query = query.replace("tell me", "")
                 query = query.replace("about", "")
@@ -159,7 +159,33 @@ def process_command(query):
                     webbrowser.open("https://google.com/search?q=%s" % query)
                     speak('Sir,the search result are')
                     
+
+            #responses to topics of interests
+            elif 'whatsapp' in query or 'whats up' in query or 'what\'s going' in query:
+                speak('Nothing great sir,just surfing the web ,have look over this one')
+                topic=["SpaceX","ISRO","5G technoloy","pslv","gslv","NASA","Ai","machne learning","deep learning","natural language processing","artificial intelligence","neural networks"]
+                query = topic[random.randint(0,len(topic)-1)]
+                try:
+                    results = wikipedia.summary(query, sentences=2)
+                    webbrowser.open("https://google.com/search?q=%s" % query)
+                    #print(results)
+                    speak(results)
+                except:
+                    webbrowser.open("https://google.com/search?q=%s" % query)
                
+            #play youtube video or live stream
+            elif 'latest news'in query or 'news'in query or 'youtube video' in query or 'youtube' in query :
+                query = query.replace("tell me", "")
+                query = query.replace("youtube video", "")
+                query = query.replace("youtube", "")
+                
+                try:
+                    webbrowser.open(youtubesearch(query))
+                except:
+                    speak('couldnot find the website sir')
+                    speak('Searching on google')
+                    webbrowser.open("https://google.com/search?q=%s" % query)
+                    speak('Sir,the search result are')
 
 
             elif 'alright' in query or 'ok' in query or 'okay' in query or  'right' in query :
