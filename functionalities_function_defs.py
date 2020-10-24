@@ -1,4 +1,4 @@
-
+from import_libs import *
 
 ''' weather report functions'''
 def weather_data(query):
@@ -14,3 +14,14 @@ def print_weather(result,city):
 	speak("Description: {}".format(result['weather'][0]['description']))
 	print("Weather: {}".format(result['weather'][0]['main']))
 	speak("Weather: {}".format(result['weather'][0]['main']))
+
+
+
+''' function to search file location of given file '''
+def find_files(filename, search_path):
+   result = []
+    # Wlaking top-down from the root
+   for root, dir, files in os.walk(search_path):
+      if filename in files:
+         result.append(os.path.join(root,""))
+   return (str(result))

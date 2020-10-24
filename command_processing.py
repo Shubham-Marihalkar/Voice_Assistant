@@ -82,7 +82,67 @@ def process_command(query):
                         webbrowser.open(url)
                         speak('Sir,the weather forcast is')
 
+            elif 'read' in query and 'file' in query:
+                query = query.replace("open", "")
+                query = query.replace("file", "")
+                query = query.replace(" ", "")
+                query = query.repl4ace("dot", ".")
+                
+                print(query)
+                try:
+                    fpath=(find_files(query,"D:"))
+                    fpath=fpath.split(",")[0]
+                    fpath=fpath[2:-2]
+                    fpath=fpath.replace("\\\\\\","\\")
+                    fpath=fpath[0:-1]
+                    print(fpath)
+                    #os.startfile(os.path.join(fpath,query))
+                except:
+                    speak("Sorry sir couldnot find the file")
 
+            elif 'open' in query and( 'file' in query or 'dot' in query):
+                query = query.replace("open", "")
+                query = query.replace("file", "")
+                query = query.replace(" ", "")
+                query = query.replace("dot", ".")
+                query = query.replace("text", "txt")
+                
+                print(query)
+                name1=find_files(query,"D:")
+                print(name1)
+                fpath=(name1)
+                fpath=fpath.split(",")[0]
+                try:
+
+                    fpath=fpath[2:-2]
+                    fpath=fpath.replace("\\\\\\","\\")
+                    fpath=fpath[0:-1]
+                    print(fpath)
+                    os.startfile(os.path.join(fpath,query))
+                except:
+                    speak("Sorry sir couldnot find the file")
+
+            elif 'open' in query and 'folder' in query:
+                query = query.replace("open", "")
+                query = query.replace("folder", "")
+                query = query.replace("file", "")
+                query = query.replace(" ", "")
+                query = query.replace("dot", ".")
+                query = query.replace("text", "txt")
+                print(query)
+
+                try:
+                    fpath=(find_files(query,"D:"))
+                    fpath=fpath.split(",")[0]
+                    fpath=fpath[2:-2]
+                    fpath=fpath.replace("\\\\\\","\\")
+                    fpath=fpath[0:-1]
+                    print(fpath)
+                    subprocess.Popen('explorer /select,"'+fpath+'"')
+                    #os.startfile(os.path.join(fpath,query))
+                except:
+                    speak("Sorry sir couldnot find the file")
+                
 
 
 
