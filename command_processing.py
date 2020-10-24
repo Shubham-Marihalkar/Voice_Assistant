@@ -1,6 +1,6 @@
 from import_libs import *
 from voice_settings import *
-
+from functionalities_function_defs import *
 
 def process_command(query):
     if True:
@@ -52,6 +52,40 @@ def process_command(query):
 
             elif 'thanks' in query or 'thank you' in query:
                 speak('you are welcome sir')
+
+            elif 'weather' in query:
+                # to search
+                if 'forecast' in query or 'show' in query or "of" in query:
+                    query = query.replace("show", "")
+                    query=query.replace(" of ","")
+                    query=query.replace(" ","")
+                    city=query
+                    
+                    city=city.replace("weather","")
+                    city=city.replace("forecast","")
+                    city=city.replace("for","")
+                    print(city+"'s weather is")
+                    try:
+                        query1='q='+city;
+                        w_data=weather_data(query1);
+                        print_weather(w_data, city)
+                        print()
+                        for url in search(query, tld="co.in", num=3, stop = 3, pause = 2):                
+                            #print(url)
+                            print()
+                        webbrowser.open(url)
+                        speak('Sir,the weather forcast is')
+                    except:
+                        for url in search(query, tld="co.in", num=3, stop = 3, pause = 2):
+                            print()
+                            #print(url)
+                        webbrowser.open(url)
+                        speak('Sir,the weather forcast is')
+
+
+
+
+
             elif 'alright' in query or 'ok' in query or 'okay' in query or  'right' in query :
                 speak('Hmm')
             else:
