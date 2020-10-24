@@ -183,20 +183,27 @@ def process_command(query):
 
             #play youtube video or live stream
             elif 'latest news'in query or 'news'in query or 'youtube video' in query or 'youtube' in query :
-                query = query.replace("tell me", "")
-                query = query.replace("youtube video", "")
-                query = query.replace("youtube", "")
-                query=query.replace("play", "")
-                webbrowser.open(youtubesearch(query))
+                
                 try:
-                    pass
+                    query = query.replace("tell me", "")
+                    query = query.replace("youtube video", "")
+                    query = query.replace("youtube", "")
+                    query=query.replace("play", "")
+                    webbrowser.open(youtubesearch(query))
                 except:
                     speak('couldnot find the website sir')
                     speak('Searching on google')
                     webbrowser.open("https://google.com/search?q=%s" % query)
                     speak('Sir,the search result are')
 
-
+            elif 'play music' in query or 'next song' in query or 'play next' in query :
+                music_dir = 'D:\entertainment\songs\latest'
+                songs = os.listdir(music_dir)
+                songnum=random.randint(0,len(songs)-1)
+                while not('.mp3' in songs[songnum]):
+                    songnum=random.randint(0,len(songs))
+                os.startfile(os.path.join(music_dir,songs[songnum]))
+                
             elif 'alright' in query or 'ok' in query or 'okay' in query or  'right' in query :
                 speak('Hmm')
             else:
