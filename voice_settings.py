@@ -19,7 +19,7 @@ def speak(audio):
 
 
 ''' greeting function for starting convo '''
-def greet():
+def greet(name):
     hour = int(datetime.datetime.now().hour)
     if hour>=0 and hour<12:
         speak("Good Morning!")
@@ -30,7 +30,7 @@ def greet():
     else:
         speak("Good Evening!")  
     
-    speak(" hello sir,Asus here!,Please tell me how may I help you")       
+    speak(" "+name)       
 
 
 ''' function to taje voice commands '''
