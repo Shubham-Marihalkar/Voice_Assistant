@@ -5,3 +5,7 @@ CurrentFilePath.txt
 __pycache__
 
 
+#static data
+dataset
+trainer
+
